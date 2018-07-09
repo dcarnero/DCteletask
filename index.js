@@ -1,21 +1,31 @@
 var http = require('http');
 var Accessory, Service, Characteristic, UUIDGen;
- 
+//-------------------------------
+var Teletask = require('node-teletask');
+var HOST = '192.168.1.5';
+var PORT = 55957;
+var teletask = new Teletask.connect(HOST,PORT);
+//-------------------------------
 module.exports = function (homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   UUIDGen = homebridge.hap.uuid;
 
 homebridge.registerPlatform("DCteletask-switch-plugin", "DCteletask-Switch", DCteletask, true);
-}
+};
 //----------------------------------------------------
+
+
+
+//-------------------------------------
 function DCteletask-Switch(log, config, api) {
   log("DCteletask-Switch Init");
   var platform = this;
   this.log = log;
   this.config = config;
   this.accessories = [];
-//----------------------------------------------------
+//----------------------------------------
+
 Switch.prototype = {
   getServices: function () {
     let informationService = new Service.AccessoryInformation();
